@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+       <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+	<title>Eventos</title>
+
+</head>
+
+	<body>
+		<nav>
+	 	   <div class="nav-wrapper pink darken-2">
+	    	  <a href="/home" class="brand-logo right">EVENTOS!</a>
+	    	  <ul id="nav-mobile" class="left hide-on-med-and-down">
+	        	<li><a href="/home">Home</a></li>
+	        	<li><a href="/eventos">Eventos</a></li>
+	        	<li><a href="/cadastrarEvento">Cadastro de Eventos</a></li>
+	           	</ul>
+	         	</div>
+	         	
+  		</nav>
+	
+		<h1>Lista de eventos</h1>
+	<h3><a href="/cadastrarEvento" class="waves-effect pink darken-2 btn">
+	<i class="material-icons left">add_circle_outline</i>Cadastrar Evento</a></h3>
+		
+		<table class="container">
+			<thead>
+				<tr>
+				<th>Nome</th>
+				<th>Local</th>
+				<th>Data</th>
+				<th>Horario</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="eventos : ${eventos}">
+				<td><a th:href="${(#mvc.url('EC#detalhesEventos').arg(0, eventos.codigo)).build()}"><span th:text="${eventos.nome}"></span></a></td>
+				<td><span th:text="${eventos.local}"></span></td>
+				<td><span th:text="${eventos.data}"></span></td>
+				<td><span th:text="${eventos.horario}"></span></td>
+				<td><a class="waves-effect pink darken-2 btn-small" th:href="${(#mvc.url('EC#deletarEvento').arg(0, eventos.codigo)).build()}"><i class="material-icons left">delete</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    
+</body>
+</html>

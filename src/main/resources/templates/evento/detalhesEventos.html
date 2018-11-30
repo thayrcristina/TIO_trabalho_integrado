@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+       <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+<title>Eventos</title>
+</head>
+
+<body>
+
+	<nav>
+	    <div class="nav-wrapper pink darken-2">
+	      <a href="/home" class="brand-logo right">EVENTOS!</a>
+	      <ul id="nav-mobile" class="left hide-on-med-and-down">
+	      <li><a href="/home">Home</a></li>
+	      <li><a href="/eventos">Eventos</a></li>
+	        <li><a href="/cadastrarEvento">Cadastro de Eventos</a></li>
+	        	</ul>
+       </div>
+  </nav>
+
+
+	<h3><a href="/eventos">Evento</a></h3>
+	
+	<div th:each="eventos : ${eventos}" class="container">
+		<div class='row'>
+			<p>Nome: <span th:text="${eventos.nome}"></span></p>
+			<p>Local: <span th:text="${eventos.local}"></span></p>
+			<p>Data: <span th:text="${eventos.data}"></span></p>
+			<p>Horario: <span th:text="${eventos.horario}"></span></p>
+		</div>
+		</div>
+		
+	
+	<th:block th:include="validacao"></th:block>
+	
+	<form method="post">
+	
+	    <div class="input-field col s3">
+          <i class="material-icons prefix">person_add</i>
+          <input id="icon_nome" type="text" class="validate" value="" name="nomeconvidado"/>
+          <label for="icon_nome">Nome</label>
+         </div>
+		    
+		 <div class="input-field col s3">
+	          <i class="material-icons prefix">person_add</i>
+		      <input id="icon_rg" type="text" class="validate" value="" name="rg"/>
+		      <label for="icon_rg">RG</label>
+		 </div>
+		
+			<button class="btn waves-effect pink darken-2" type="submit" name="action">Salvar
+  			<i class="material-icons right">send</i></button>
+	</form>
+	
+	<h5>Lista de Convidados:</h5>
+	<table class="container">
+	  <thead>
+		<tr>
+			<th>Nome Convidado</th>
+			<th>RG</th>
+		</tr>
+	</thead>
+		
+		<tbody>
+			<tr th:each="convidados : ${convidados}">
+			<td><span th:text="${convidados.nomeconvidado}"></span></td>
+			<td><span th:text="${convidados.rg}"></span></td>
+			<td><a class="waves-effect pink darken-2  btn-small" th:href="${(#mvc.url('EC#deletarConvidados').arg(0, convidados.rg)).build()}"><i class="material-icons left">delete</i></a></td>
+		</tr>
+			</tbody>
+		</table>
+
+</body>
+</html>
